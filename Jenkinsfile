@@ -2,35 +2,44 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'node18'
+        nodejs 'nodejs'
     }
 
     stages {
-        stage('Checkout Source') {
+
+        stage('Checkout Code') {
             steps {
                 git branch: 'master',
                     url: 'https://github.com/sulaimandevops27-dotcom/task.git'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Verify Node & NPM') {
             steps {
                 sh 'node -v'
                 sh 'npm -v'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
                 sh 'npm install'
             }
         }
 
-        stage('Run Tests') {
+        stage('Build UI') {
             steps {
-                sh 'npm test || echo "No tests defined"'
+                sh 'CI=false npm run build'
             }
         }
+    }
 
-        stage('Build') {
-            steps {
-                sh 'npm run build || echo "No build step defined"'
-            }
+    post {
+        success {
+            echo ‘UI build completed successfully'
+        }
+        failure {
+            echo 'UI build failed'
         }
     }
 }
