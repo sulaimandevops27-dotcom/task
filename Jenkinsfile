@@ -2,14 +2,13 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'nodejs'
+        nodejs "nodejs"
     }
 
     stages {
-
         stage('Checkout Code') {
             steps {
-                git branch: 'master',
+                branch: 'master',
                     url: 'https://github.com/saivicky123/Trading-UI.git'
             }
         }
