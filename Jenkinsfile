@@ -36,10 +36,13 @@ pipeline {
 
     post {
         success {
-            echo ‘ build completed successfully'
+            echo 'Build completed successfully'
         }
         failure {
-            echo ' build failed'
+            echo 'Build failed'
+        }
+        always {
+            cleanWs()
         }
     }
 }
