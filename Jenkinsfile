@@ -2,13 +2,14 @@ pipeline {
     agent any
 
     tools {
-        nodejs "nodejs"
+        NodeJS 'NodeJS'
     }
 
     stages {
+
         stage('Checkout Code') {
             steps {
-                branch: 'master',
+                git branch: 'master',
                     url: 'https://github.com/saivicky123/Trading-UI.git'
             }
         }
@@ -35,7 +36,7 @@ pipeline {
 
     post {
         success {
-            echo ‘UI build completed successfully'
+            echo 'UI build completed successfully'
         }
         failure {
             echo 'UI build failed'
