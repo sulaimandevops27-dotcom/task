@@ -36,10 +36,10 @@ pipeline {
 
     post {
         success {
-            echo ‘UI build completed successfully'
+            echo ‘ build completed successfully'
         }
         failure {
-            echo 'UI build failed'
+            echo ' build failed'
         }
     }
 }
