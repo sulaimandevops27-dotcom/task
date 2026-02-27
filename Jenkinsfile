@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'node.js'
+        nodejs 'Node.js'
     }
 
     stages {
@@ -36,11 +36,10 @@ pipeline {
 
     post {
         success {
-            echo 'UI build completed successfully'
+            echo ‘UI build completed successfully'
         }
         failure {
             echo 'UI build failed'
         }
     }
 }
-
