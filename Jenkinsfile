@@ -3,20 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Install NodeJS Automatically') {
-            steps {
-                sh '''
-                if ! command -v node > /dev/null 2>&1; then
-                    echo "Node not found. Installing NodeJS..."
-                    curl -fsSL https://rpm.nodesource.com/setup_18.x | sudo bash -
-                    sudo yum install -y nodejs
-                else
-                    echo "Node already installed"
-                fi
-                '''
-            }
-        }
-
         stage('Checkout Code') {
             steps {
                 git branch: 'master',
