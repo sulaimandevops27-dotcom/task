@@ -1,22 +1,45 @@
 pipeline {
     agent any
-      
+
+    tools {
+        nodejs 'nodejs'
+    }
 
     stages {
-        stage('Git checkout') {
+
+        stage('Checkout Code') {
             steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/betawins/Trading-UI.git'
-                   }
-}
-        stage('Install npm prerequisites'){
-            steps{
-                sh'npm audit fix'
-                sh'npm install'
-                sh'npm run build'
-                sh'cd /var/lib/jenkins/workspace/Trading-ui-pipeline/build'
-                sh'pm2 --name Trading-UI start npm -- start'
+                git branch: 'master',
+                    url: 'https://github.com/sulaimandevops27-dotcom/task.git'
             }
+        }
+
+        stage('Verify Node & NPM') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Build UI') {
+            steps {
+                sh 'CI=false npm run build'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo ‘UI build completed successfully'
+        }
+        failure {
+            echo 'UI build failed'
         }
     }
 }
