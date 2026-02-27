@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'master',
-                    url: 'https://github.com/sulaimandevops27-dotcom/task.git'
+                    url: 'https://github.com/saivicky123/Trading-UI.git'
             }
         }
 
@@ -36,7 +36,7 @@ pipeline {
 
     post {
         success {
-            echo 'UI build completed successfully'
+            echo ‘UI build completed successfully'
         }
         failure {
             echo 'UI build failed'
