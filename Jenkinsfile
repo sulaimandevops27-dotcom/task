@@ -29,20 +29,23 @@ pipeline {
 
         stage('Build UI') {
             steps {
-                sh 'CI=false npm run build'
+                sh '''
+                export NODE_OPTIONS=--openssl-legacy-provider
+                CI=false npm run build
+                '''
             }
         }
     }
 
     post {
+        always {
+            deleteDir()
+        }
         success {
             echo 'Build completed successfully'
         }
         failure {
             echo 'Build failed'
-        }
-        always {
-            deleteDir()
         }
     }
 }
